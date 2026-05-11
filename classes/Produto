@@ -1,0 +1,79 @@
+<?php
+declare(strict_types=1);
+
+class Produto {
+
+    public function __construct(
+        private string $nome,
+        private float $preco,
+        private string $categoria,
+        private int $estoque
+    ) {}
+
+    public function verificarEstoque(): string {
+
+        if ($this->estoque > 0) {
+
+            return "
+            <span class='badge bg-success'>
+                Disponível
+            </span>
+            ";
+        }
+
+        return "
+        <span class='badge bg-danger'>
+            Indisponível
+        </span>
+        ";
+    }
+
+    public function diminuirEstoque(): void {
+
+        if ($this->estoque > 0) {
+            $this->estoque--;
+        }
+    }
+
+    public function getPreco(): float {
+        return $this->preco;
+    }
+
+    public function getNome(): string {
+        return $this->nome;
+    }
+
+    public function exibirProduto(): string {
+
+        return "
+        <div class='card p-3 h-100'>
+
+            <h5 class='fw-bold mb-3'>
+                {$this->nome}
+            </h5>
+
+            <p>
+                <strong>Categoria:</strong> {$this->categoria}
+            </p>
+
+            <p class='text-success fw-bold fs-5'>
+                R$ {$this->preco}
+            </p>
+
+            <p>
+                <strong>Estoque:</strong> {$this->estoque}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                ".$this->verificarEstoque()."
+            </p>
+
+            <button class='btn btn-danger w-100 mt-2'>
+                Adicionar ao Pedido
+            </button>
+
+        </div>
+        ";
+    }
+}
