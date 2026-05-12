@@ -13,25 +13,16 @@ class Produto {
     public function verificarEstoque(): string {
 
         if ($this->estoque > 0) {
-
-            return "
-            <span class='badge bg-success'>
-                Disponível
-            </span>
-            ";
+            return "<span class='badge bg-success'>Disponível</span>";
         }
 
-        return "
-        <span class='badge bg-danger'>
-            Indisponível
-        </span>
-        ";
+        return "<span class='badge bg-danger'>Indisponível</span>";
     }
 
-    public function diminuirEstoque(): void {
+    public function diminuirEstoqueQuantidade(int $quantidade): void {
 
-        if ($this->estoque > 0) {
-            $this->estoque--;
+        if ($this->estoque >= $quantidade) {
+            $this->estoque -= $quantidade;
         }
     }
 
@@ -47,32 +38,11 @@ class Produto {
 
         return "
         <div class='card p-3 h-100'>
-
-            <h5 class='fw-bold mb-3'>
-                {$this->nome}
-            </h5>
-
-            <p>
-                <strong>Categoria:</strong> {$this->categoria}
-            </p>
-
-            <p class='text-success fw-bold fs-5'>
-                R$ {$this->preco}
-            </p>
-
-            <p>
-                <strong>Estoque:</strong> {$this->estoque}
-            </p>
-
-            <p>
-                <strong>Status:</strong>
-                ".$this->verificarEstoque()."
-            </p>
-
-            <button class='btn btn-danger w-100 mt-2'>
-                Adicionar ao Pedido
-            </button>
-
+            <h5>{$this->nome}</h5>
+            <p><strong>Categoria:</strong> {$this->categoria}</p>
+            <p class='text-success fw-bold'>R$ {$this->preco}</p>
+            <p><strong>Estoque:</strong> {$this->estoque}</p>
+            <p>".$this->verificarEstoque()."</p>
         </div>
         ";
     }
