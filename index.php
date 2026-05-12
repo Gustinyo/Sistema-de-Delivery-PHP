@@ -7,19 +7,39 @@ require_once "classes/Pedido.php";
 require_once "classes/Entregador.php";
 require_once "classes/ItemPedido.php";
 
-
 $cliente1 = new Cliente(
     "João Victor Rocha Cândido",
     "(35) 12345-4321",
     "Rua 3 de fevereiro, 67"
 );
 
+$produto1 = new Produto(
+    "X-Burguer Artesanal",
+    28.90,
+    "Lanche",
+    10
+);
 
-$produto1 = new Produto("X-Burguer Artesanal", 28.90, "Lanche", 10);
-$produto2 = new Produto("Batata Frita Especial", 16.50, "Porção", 8);
-$produto3 = new Produto("Refrigerante 2L", 12.00, "Bebida", 5);
-$produto4 = new Produto("Milk Shake Chocolate", 18.90, "Sobremesa", 4);
+$produto2 = new Produto(
+    "Batata Frita Especial",
+    16.50,
+    "Porção",
+    8
+);
 
+$produto3 = new Produto(
+    "Refrigerante 2L",
+    12.00,
+    "Bebida",
+    5
+);
+
+$produto4 = new Produto(
+    "Milk Shake Chocolate",
+    18.90,
+    "Sobremesa",
+    4
+);
 
 $entregador1 = new Entregador(
     "Fernando Dutra",
@@ -27,20 +47,18 @@ $entregador1 = new Entregador(
     true
 );
 
-
 $pedido1 = new Pedido(
     $cliente1,
     "Em preparo"
 );
 
-$item1 = new ItemPedido($produto1, 2); // 2 X-Burguer
-$item2 = new ItemPedido($produto2, 1); // 1 Batata
-$item3 = new ItemPedido($produto3, 3); // 3 Refrigerantes
+$item1 = new ItemPedido($produto1, 2);
+$item2 = new ItemPedido($produto2, 1);
+$item3 = new ItemPedido($produto3, 3);
 
 $pedido1->adicionarItem($item1);
 $pedido1->adicionarItem($item2);
 $pedido1->adicionarItem($item3);
-
 
 $produtos = [
     $produto1,
@@ -48,7 +66,6 @@ $produtos = [
     $produto3,
     $produto4
 ];
-
 ?>
 
 <!DOCTYPE html>
@@ -57,16 +74,26 @@ $produtos = [
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Papa-Léguas Delivery</title>
+    <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>
+        Papa-Léguas Delivery
+    </title>
 
-    <link rel="stylesheet"
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+    <link
+    rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="style.css?v=2">
 
 </head>
 
@@ -76,15 +103,22 @@ $produtos = [
 
     <div class="container justify-content-center">
 
-       <a class="navbar-brand fw-bold fs-3 text-center" href="#">
+        <a
+        class="navbar-brand fw-bold fs-3 text-center"
+        href="#">
 
             <div class="logo-icon">
-                <img src="img/papa-leguas.png" alt="Papa-Léguas" class="logo-img">
+
+                <img
+                src="img/papa-leguas.png"
+                alt="Papa-Léguas"
+                class="logo-img">
+
             </div>
 
-            <div>
+            <span class="logo-text">
                 Papa-Léguas Delivery
-            </div>
+            </span>
 
         </a>
 
@@ -92,7 +126,7 @@ $produtos = [
 
 </nav>
 
-<section class="hero-section text-center text-light d-flex align-items-center">
+<section class="hero-section text-center text-light d-flex align-items-center justify-content-center">
 
     <div class="container">
 
@@ -110,29 +144,33 @@ $produtos = [
 
 <div class="container my-5">
 
-    
     <section class="mb-5">
 
         <div class="d-flex align-items-center mb-4">
 
             <i class="bi bi-person-circle fs-2 text-danger me-2"></i>
 
-            <h2 class="fw-bold m-0">Cliente</h2>
+            <h2 class="fw-bold m-0">
+                Cliente
+            </h2>
 
         </div>
 
-        <?php echo $cliente1->exibirCliente(); ?>
+        <?php
+            echo $cliente1->exibirCliente();
+        ?>
 
     </section>
 
-    
     <section class="mb-5">
 
         <div class="d-flex align-items-center mb-4">
 
             <i class="bi bi-bag-fill fs-2 text-danger me-2"></i>
 
-            <h2 class="fw-bold m-0">Cardápio</h2>
+            <h2 class="fw-bold m-0">
+                Cardápio
+            </h2>
 
         </div>
 
@@ -141,7 +179,9 @@ $produtos = [
             <?php foreach ($produtos as $produto): ?>
 
                 <div class="col-md-6 col-lg-3">
+
                     <?= $produto->exibirProduto(); ?>
+
                 </div>
 
             <?php endforeach; ?>
@@ -150,33 +190,39 @@ $produtos = [
 
     </section>
 
-    
     <section class="mb-5">
 
         <div class="d-flex align-items-center mb-4">
 
             <i class="bi bi-bicycle fs-2 text-danger me-2"></i>
 
-            <h2 class="fw-bold m-0">Entregador</h2>
+            <h2 class="fw-bold m-0">
+                Entregador
+            </h2>
 
         </div>
 
-        <?php echo $entregador1->exibirEntregador(); ?>
+        <?php
+            echo $entregador1->exibirEntregador();
+        ?>
 
     </section>
 
-    
     <section class="mb-5">
 
         <div class="d-flex align-items-center mb-4">
 
             <i class="bi bi-receipt-cutoff fs-2 text-danger me-2"></i>
 
-            <h2 class="fw-bold m-0">Pedido</h2>
+            <h2 class="fw-bold m-0">
+                Pedido
+            </h2>
 
         </div>
 
-        <?php echo $pedido1->exibirPedido(); ?>
+        <?php
+            echo $pedido1->exibirPedido();
+        ?>
 
     </section>
 

@@ -17,9 +17,6 @@ body {
     background-position: center;
 
     height: 350px;
-
-    display: flex;
-    justify-content: center;
 }
 
 h2 {
@@ -56,54 +53,55 @@ footer {
 
 .logo-icon {
 
-    width: 80px;
-    height: 80px;
-
-    background: linear-gradient(135deg, #ff3b3b, #dc3545);
+    width: 90px;
+    height: 90px;
 
     border-radius: 50%;
+
+    overflow: hidden;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    margin: 0 auto 10px auto;
+    background-color: white;
 
-    overflow: hidden;
+    margin: 0 auto 8px auto;
 
-    border: 4px solid white;
+    border: 3px solid white;
 
-    box-shadow: 0 6px 15px rgba(0,0,0,0.35);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.logo-img{
+.logo-img {
 
-    width: 100%;
-    height: 100%;
+    width: 130%;
+    height: 130%;
 
-    object-fit: cover;
+    object-fit: contain;
 
-    object-position: center top;
-
-    transform: scale(1.15);
-
-    border-radius: 50%;
+    transform: translateY(10px);
 }
 
 .navbar-brand {
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
 
-    line-height: 1.1;
+    justify-content: center;
 
     text-decoration: none;
 
     transition: transform 0.3s ease;
 }
 
-.navbar-brand:hover{
-    transform: scale(1.05);
+.navbar-brand:hover {
+    transform: scale(1.03);
+}
+
+.logo-text {
+    color: white;
 }
