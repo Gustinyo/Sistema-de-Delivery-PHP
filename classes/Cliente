@@ -9,7 +9,12 @@ class Cliente {
         private string $endereco
     ) {}
 
-    public function exibirCliente() {
+    public function getNome(): string {
+        return $this->nome;
+    }
+
+    public function exibirCliente(): string {
+
         return "
         <div class='card p-3 mb-3'>
             <h5>Cliente</h5>
@@ -18,9 +23,5 @@ class Cliente {
             <p><strong>Endereço:</strong> {$this->endereco}</p>
         </div>
         ";
-    }
-
-    public function getNome() {
-        return $this->nome;
     }
 }
