@@ -3,109 +3,73 @@ declare(strict_types=1);
 
 class Pedido {
 
-    private array $produtos = [];
+    private array $itens = [];
 
     public function __construct(
         private Cliente $cliente,
         private string $status
     ) {}
 
-    public function adicionarProduto(Produto $produto): bool {
+    public function adicionarItem(ItemPedido $item): void {
 
-        if ($produto->verificarEstoque()) {
+        $this->itens[] = $item;
 
-            $this->produtos[] = $produto;
-            $produto->diminuirEstoque();
-
-            return true;
-        }
-
-        return false;
+      
+        $item->getProduto()->diminuirEstoqueQuantidade(
+            $item->getQuantidade()
+        );
     }
 
     public function calcularTotal(): float {
 
         $total = 0;
 
-        foreach ($this->produtos as $produto) {
-            $total += $produto->getPreco();
+        foreach ($this->itens as $item) {
+            $total += $item->getSubtotal();
         }
 
         return $total;
     }
 
-    public function quantidadeProdutos(): int {
-        return count($this->produtos);
+    public function quantidadeItens(): int {
+        return count($this->itens);
     }
 
     public function verificarFreteGratis(): string {
 
         if ($this->calcularTotal() >= 50) {
-
-            return "
-            <span class='badge bg-success fs-6'>
-                Frete Grátis
-            </span>
-            ";
+            return "<span class='badge bg-success'>Frete Grátis</span>";
         }
 
-        return "
-        <span class='badge bg-warning text-dark fs-6'>
-            Frete Pago
-        </span>
-        ";
+        return "<span class='badge bg-warning text-dark'>Frete Pago</span>";
     }
 
     public function exibirPedido(): string {
 
         $html = "
-        <div class='card p-4 mb-3'>
+        <div class='card p-4'>
+            <h4>Pedido</h4>
 
-            <h4 class='fw-bold mb-4'>
-                Pedido
-            </h4>
+            <p><strong>Cliente:</strong> {$this->cliente->getNome()}</p>
+            <p><strong>Itens:</strong> {$this->quantidadeItens()}</p>
 
-            <p>
-                <strong>Cliente:</strong>
-                ".$this->cliente->getNome()."
-            </p>
-
-            <p>
-                <strong>Quantidade de Produtos:</strong>
-                ".$this->quantidadeProdutos()."
-            </p>
-
-            <h5 class='mt-4'>
-                Produtos
-            </h5>
-
-            <ul class='list-group mb-4'>
+            <ul class='list-group mb-3'>
         ";
 
-        foreach ($this->produtos as $produto) {
-
-            $html .= "
-            <li class='list-group-item'>
-                ".$produto->getNome()."
-            </li>
-            ";
+        foreach ($this->itens as $item) {
+            $html .= $item->exibirItem();
         }
 
         $html .= "
             </ul>
 
-            <p class='fs-3 fw-bold text-success'>
+            <p class='fw-bold text-success'>
                 Total: R$ ".$this->calcularTotal()."
             </p>
 
-            <p>
-                ".$this->verificarFreteGratis()."
-            </p>
+            <p>".$this->verificarFreteGratis()."</p>
 
-            <p>
-                <strong>Status:</strong> {$this->status}
-            </p>
-
+            <p><strong>Status:</strong> {$this->status}</p>
         </div>
         ";
 
